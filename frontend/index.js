@@ -64,7 +64,7 @@ function remove(id) {
 }
 
 function play(id) {
-  const element = document.getElementById(`audio${id}`).play();
+  document.getElementById(`audio${id}`).play();
 }
 
 list();

@@ -1,6 +1,3 @@
-/* @import "https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css"; */
-/* @import "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"; */
-
 .card {
   box-shadow: none;    
   padding: 24px;
@@ -26,20 +23,14 @@
   vertical-align: middle;
 }
 
-.left-column {  
-  border-right: 1px solid rgba(0,0,0,.125) !important;    
-}
-
-.right-column {  
-  border-left: 1px solid rgba(0,0,0,.125) !important;    
-}
-
 @media (min-width: 992px){
   .left-column {
     padding-right: 6rem !important;
+    border-right: 1px solid rgba(0,0,0,.125) !important;
   }
   .right-column {
     padding-left: 6rem !important;
+    border-left: 1px solid rgba(0,0,0,.125) !important;
   }
 }
 
