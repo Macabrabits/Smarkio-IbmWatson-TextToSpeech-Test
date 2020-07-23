@@ -1,0 +1,1 @@
+Para iniciar o frontend, basta abrir o index.html, de preferência no Chrome.
