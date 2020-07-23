@@ -1,50 +1,45 @@
-@import "https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css";
+/* @import "https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css"; */
 /* @import "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"; */
-
-#player {
-  background-color: white;
-  width: 90%;
-  max-width: 375px;
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.12),
-    0px 3px 1px -2px rgba(0, 0, 0, 0.12), 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
-}
 
 .card {
   box-shadow: none;    
+  padding: 24px;
+  border: 0px !important;
 }
 
-.card .card-content {
-  padding: 24px;
+.card .card-content {  
   border-radius: 0 0 2px 2px;
+  margin-bottom: 50px;
 }
 
 .comment-items{
-  display: flex;
-  margin-top: 30px;
+  display: block;  
 }
 
-h4 {
-  color: #7159c1;
-  font-size: 20px;
-  font-weight: bold;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
+.comment-items button {       
+  border-radius: 10px;
+  padding: 5px 10px 5px 10px;
 }
 
-.comment-items audio {
-  /* width: 100%; */
-  flex: 1;
-  height: 50px;
-  border-radius: 10px !important;
-  
-  
+.comment-items button span {     
+  font-size: 2em;  
+  vertical-align: middle;
 }
 
-.comment-items button {
-  flex: none;
-  height: 50px;  
-  border-radius: 25px;
+.left-column {  
+  border-right: 1px solid rgba(0,0,0,.125) !important;    
 }
+
+.right-column {  
+  border-left: 1px solid rgba(0,0,0,.125) !important;    
+}
+
+@media (min-width: 992px){
+  .left-column {
+    padding-right: 6rem !important;
+  }
+  .right-column {
+    padding-left: 6rem !important;
+  }
+}
+
