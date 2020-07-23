@@ -7,30 +7,29 @@ interface iComment {
   remove?: () => Promise<any>;
 }
 
-const index = async (req: any, inj: { comments?: iComment[] } = {}) => {
+const index = async (req: any) => {
   const where = req.query;
-  return inj.comments || Comment.find({ order: { id: 'DESC' }, where });
+  return Comment.find({ order: { id: 'DESC' }, where });
 };
 
-const show = async (req: { params: { id: any } }, inj: { comment?: iComment } = {}) => {
+const show = async (req: any) => {
   const id = req.params.id;
-  const comment: any = inj.comment || (await Comment.findOne(id));
+  const comment = await Comment.findOne(id);
   if (!comment) throw ['Comentário não encontrado.'];
   return comment;
 };
 
-const save = async (req: { body: any; params: { id?: any } }, inj: { comment?: iComment } = {}) => {
+const save = async (req: any, commentInjection?: iComment) => {
   const errors = [];
   const body = req.body;
   const id = req.params.id;
-
-  const dbComment = async () => (id ? Comment.findOne(id) : new Comment());
 
   if (!id && !body.comment) errors.push('Comentário é obrigatório.');
 
   if (errors.length) throw errors;
 
-  const comment = inj.comment || (await dbComment());
+  const comment = id ? await Comment.findOne(id) : commentInjection || new Comment();
+
   if (!comment) throw ['Comentário não encontrado para edição.'];
 
   if (errors.length) throw errors;
@@ -42,14 +41,14 @@ const save = async (req: { body: any; params: { id?: any } }, inj: { comment?: i
     throw err;
   };
 
-  return inj.comment || comment.save().catch(duplicateCommentCallback);
+  return comment.save().catch(duplicateCommentCallback);
 };
 
-const remove = async (req: any, inj: { comment?: iComment } = {}) => {
+const remove = async (req: any) => {
   const id = req.params.id;
-  const comment = inj.comment || (await Comment.findOne(id));
+  const comment = await Comment.findOne(id);
   if (!comment) throw ['Comentário não encontrado para exclusão.'];
-  return inj.comment || (await comment.remove());
+  return await comment.remove();
 };
 
 export const CommentService = {

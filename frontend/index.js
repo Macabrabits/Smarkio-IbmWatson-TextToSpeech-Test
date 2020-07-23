@@ -2,8 +2,8 @@ const baseUrl = "http://localhost:3000";
 
 let data = [];
 
-function render() {
-  let html = "";
+function render() {  
+  let html = "";  
   data.map((item) => {
     html += `<div class="card-content">
     <p>${item.comment}</p>
@@ -18,14 +18,14 @@ function render() {
   </div>`;
   });
 
-  document.getElementById("main").innerHTML = html;
+  document.getElementById("main").innerHTML = `<div class="card" id="main">${html}</div>`;
 }
 
 const list = async () => {
   axios
     .get(`${baseUrl}/comments`)
     .then((res) => {
-      data = res.data;
+      data = res.data;      
       render();
     })
     .catch((err) => alert(err.response.data));
