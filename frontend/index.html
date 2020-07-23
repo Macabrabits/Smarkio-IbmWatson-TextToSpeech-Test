@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>IBMWhatson TextToSpeech</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row m-3">
+      <div class="col-lg-6 col-md-12 p-2">
+        <div class="card p-4">
+          <form id="myForm" name="myForm">
+            <div class="form-group">
+              <label for="comment">Comentário</label>
+              <input type="text" class="form-control" id="comment" aria-describedby="emailHelp" name="comment">
+              <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+            <button type="button" onclick="create()" class="btn btn-primary">Adicionar comentário</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12 p-2">
+        <div class="card" id="main">
+          <p>Comment</p>
+          <audio controls>
+            <source src="http://localhost:3000/comments/1" type="audio/wav">
+          </audio>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>
