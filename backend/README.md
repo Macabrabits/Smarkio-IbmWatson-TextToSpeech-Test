@@ -6,6 +6,8 @@ Para inicializar a aplicação, basta ter o Docker e o Docker Composer instalado
 docker-compose up
 ```
 
+O comando pode falhar na primeira tentativa, pois o banco ainda não tem seu volume criado.
+
 ## Testes
 
 Para rodar os testes, basta rodar os seguintes comandos com os containers ainda rodando:
