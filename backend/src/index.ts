@@ -1,9 +1,12 @@
+const dotenv = require('dotenv').config().parsed
+process.env = {...dotenv, ...process.env}
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import express = require('express');
 import { router } from './routes';
 import bodyParser = require('body-parser');
 import cors = require('cors');
+
 
 createConnection()
   .then(connection => {
@@ -13,7 +16,7 @@ createConnection()
     app.use(cors());
     app = router(app);
 
-    const port = process.env.PORT || 3000;
+    const port = process.env.NODE_PORT || 3000;
     app.listen(port, () => console.log(`Application running on port: ${port}`));
   })
   .catch(error => console.log(error));

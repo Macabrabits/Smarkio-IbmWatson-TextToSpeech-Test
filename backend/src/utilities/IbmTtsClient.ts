@@ -1,6 +1,6 @@
 import TextToSpeechV1 = require('ibm-watson/text-to-speech/v1');
-// import fs = require('fs');
-// import { Readable } from 'typeorm/platform/PlatformTools';
+import config from '../config/IbmClient'
+
 const { IamAuthenticator } = require('ibm-watson/auth');
 export class IbmTtsClient {
   apiKey: string;
@@ -8,9 +8,8 @@ export class IbmTtsClient {
   textToSpeech: TextToSpeechV1;
 
   constructor() {
-    this.apiKey = 'WmxdCGeN9l_Zr34RHZWlcQu0feglllvswksqixrloTmo';
-    this.url =
-      'https://api.us-south.text-to-speech.watson.cloud.ibm.com/instances/d0db9ad2-d8a6-4099-93c2-c9d16adff4a9';
+    this.apiKey = config.apiKey;
+    this.url = config.url;
 
     this.textToSpeech = new TextToSpeechV1({
       authenticator: new IamAuthenticator({
