@@ -2,38 +2,26 @@ import { Comment } from '../typeorm/entity/Comment';
 import { IbmTtsClient } from '../utilities/IbmTtsClient';
 const commentCli = new IbmTtsClient();
 import { Response, Request } from 'express';
-const mediaserver = require('mediaserver');
+import { RedisCli } from '../utilities/RedisCli';
 
 const stream = async (req: Request | { params: { id: any } }, res: Response, inj: { comment?: any } = {}) => {
   const id = req.params.id;
-  // const comment: any = inj.comment || (await Comment.findOne(id));
   const comment = await Comment.findOne(id);
   if (!comment) throw ['Comentário não encontrado.'];
 
-  commentCli
-    .convert(comment.comment)
-    .then(buffer => {
-      res.setHeader('Content-Type', 'audio/wav');
-      //  res.setHeader('Content-Disposition', `attachment; filename=audio.wav`);
-      res.setHeader('Content-Disposition', `inline`);
-      res.write(buffer);
-    })
-    .then(() => res.end());
+  const getBuffer = () =>
+    commentCli.convert(comment.comment).then(buffer => {
+      return { type: 'Buffer', data: buffer };
+    });
 
-  // mediaserver.pipe(req, res, 'audio.wav');
+  const buffer = await RedisCli.getOrSet(`comment:${comment.comment}`, getBuffer)
+  .then(object => Buffer.from(object.data));
 
-  // commentCli
-  //   .convert('Hello')
-  //   .then(repairedFile => {
-  //     fs.writeFileSync('audio.wav', repairedFile);
-  //     console.log('audio.wav written with a corrected wav header');
-  //   })
-  //   .then(file => {
-  //     mediaserver.pipe(req, res, file);
-  //   })
-  //   .then(() => res.end());
-
-  return;
+  res.setHeader('Content-Type', 'audio/wav');
+  //  res.setHeader('Content-Disposition', `attachment; filename=audio.wav`);
+  res.setHeader('Content-Disposition', `inline`);
+  res.write(buffer);
+  res.end();
 };
 
 export const PlayerService = { stream };

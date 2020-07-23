@@ -25,7 +25,7 @@ const getOrSet = (key:string, callback:() => any, expireInSeconds?: number): Pro
 
     try {
       value = await getCache(key);
-      colorTrace(`Cache de ${key} utilizado`, "green");
+      colorTrace(`Cache de ${key} utilizado`, "green");      
     } catch (err) {
       value = await callback();
       setCache(key, value, expireInSeconds);
@@ -33,8 +33,7 @@ const getOrSet = (key:string, callback:() => any, expireInSeconds?: number): Pro
         `Cache de ${key} não encontrado, novo cache realizado!`,
         "blue"
       );
-    }
-    // redisClient.quit();
+    }    
     resolve(value);
   });
 };
